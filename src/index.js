@@ -1,17 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import {getHeroeById} from './bases/08-imp-exp'
+import heroes from './data/heroes';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// const promesa = new Promise((resolve,reject)=>{
+//     setTimeout(() => {
+//         const heroe = getHeroeById(13);
+//         console.log(heroe);
+
+//         resolve(heroe);
+//         reject('No se pudo encontrar el heroe');
+//     }, 2000);
+// });
+
+const getHeroeByIdAsync = (id)=>{
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const heroe = getHeroeById(id);
+            console.log(heroe);
+            if (heroe)
+            resolve(heroe);
+            else
+            reject('No se pudo encontrar el heroe');
+        }, 2000);
+    })
+
+}
+
+
+getHeroeByIdAsync(14)
+    .then(console.log)
+    .catch(console.warn);
